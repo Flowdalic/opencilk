@@ -42,19 +42,14 @@ cd "${BUILD_DIR}"
 COMPONENTS="clang;compiler-rt"
 RUNTIMES="cheetah;cilktools"
 
-# TODO: Make this configurable. We want at least a debug build
-# (assertions on, RelWithDebInfo) and a release build (assertions off,
-# Release).
-OPENCILK_ASSERTIONS="On"
-BUILD_TYPE="RelWithDebInfo"
-
 cmake \
 	-G Ninja \
 	-DLLVM_ENABLE_PROJECTS="${COMPONENTS}" \
-    -DLLVM_ENABLE_RUNTIMES="${RUNTIMES}" \
-    -DLLVM_TARGETS_TO_BUILD=host \
-    -DLLVM_ENABLE_ASSERTIONS="${OPENCILK_ASSERTIONS}" \
-    -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" \
-    "${OPENCILK_PROJECT_DIR}/llvm"
+	-DLLVM_ENABLE_RUNTIMES="${RUNTIMES}" \
+	-DLLVM_TARGETS_TO_BUILD=host \
+	-DLLVM_ENABLE_ASSERTIONS="${OPENCILK_ASSERTIONS:-On}" \
+	-DCMAKE_BUILD_TYPE="${BUILD_TYPE:-RelWithDebInfo}" \
+	-DCMAKE_INSTALL_PREFIX:PATH="${INSTALL_PREFIX:-${SCRIPT_DIR}/target}" \
+	"${OPENCILK_PROJECT_DIR}/llvm"
 
 ninja
