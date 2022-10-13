@@ -1,6 +1,6 @@
 [submodule "opencilk-project"]
 	path = opencilk-project
-	url = https://github.com/Flowdalic/opencilk-project.git
+	url = https://github.com/OpenCilk/opencilk-project.git
 [submodule "productivity-tools"]
 	path = productivity-tools
 	url = https://github.com/OpenCilk/productivity-tools
